@@ -213,13 +213,13 @@ export async function getParkData() {
 			"X-Api-Key": apiKey
 		}
 	};
-    const data = {};
-  const response = await fetch(baseUrl + "parks" + "?parkCode=yell", options);
-  if (response.ok) {
-    data = await response.json();
-  } else throw new Error("response not ok")
-    return data;
-  
+	let data = {};
+	const response = await fetch(baseUrl + "parks" + "?parkCode=yell", options);
+	if (response.ok) {
+		data = await response.json();
+	} else throw new Error("response not ok")
+	return data.data[0];
+
 }
 
 export function getParkInfoLinks() {
