@@ -3,7 +3,6 @@ import { mediaCardTemplate } from "./templates.mjs";
 import { setHeaderFooter } from "./setHeaderFooter.mjs";
 
 
-const parkInfoLinks = getParkInfoLinks();
 
 function setParkIntro(data) {
 	const introEl = document.querySelector(".intro");
@@ -20,6 +19,7 @@ function setParkInfoLinks(data) {
 async function init() {
 	const parkData = await getParkData();
 
+	const parkInfoLinks = getParkInfoLinks(parkData.images);
 	setHeaderFooter(parkData);
 	setParkIntro(parkData);
 	setParkInfoLinks(parkInfoLinks);

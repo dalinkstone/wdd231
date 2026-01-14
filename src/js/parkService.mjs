@@ -206,22 +206,37 @@ const parkInfoLinks = [
 	}
 ];
 
-export async function getParkData() {
-	const options = {
-		method: "GET",
-		headers: {
-			"X-Api-Key": apiKey
-		}
-	};
-	let data = {};
-	const response = await fetch(baseUrl + "parks" + "?parkCode=yell", options);
-	if (response.ok) {
-		data = await response.json();
-	} else throw new Error("response not ok")
-	return data.data[0];
+function getInfoLinks(data) {
+
+	const withUpdatedImages = parkInfoLinks.map((item, index) => {
+		item.image = data[index + 3].url;
+		return item;
+	});
+
+	return withUpdatedImages;
 
 }
 
-export function getParkInfoLinks() {
-	return parkInfoLinks;
+async function getJson(url) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-Api-Key": apiKey
+    }
+  };
+  let data = {};
+  const response = await fetch(baseUrl + url, options);
+  if (response.ok) {
+    data = await response.json();
+  } else throw new Error("response not ok");
+  return data;
+}
+
+export async function getParkData() {
+  const parkData = await getJson("parks?parkCode=kala");
+  return parkData.data[0];
+}
+
+export function getParkInfoLinks(data) {
+	return getInfoLinks(data);
 }
