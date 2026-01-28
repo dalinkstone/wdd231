@@ -218,23 +218,33 @@ function getInfoLinks(data) {
 }
 
 async function getJson(url) {
-  const options = {
-    method: "GET",
-    headers: {
-      "X-Api-Key": apiKey
-    }
-  };
-  let data = {};
-  const response = await fetch(baseUrl + url, options);
-  if (response.ok) {
-    data = await response.json();
-  } else throw new Error("response not ok");
-  return data;
+	const options = {
+		method: "GET",
+		headers: {
+			"X-Api-Key": apiKey
+		}
+	};
+	let data = {};
+	const response = await fetch(baseUrl + url, options);
+	if (response.ok) {
+		data = await response.json();
+	} else throw new Error("response not ok");
+	return data;
 }
 
 export async function getParkData() {
-  const parkData = await getJson("parks?parkCode=kala");
-  return parkData.data[0];
+	const parkData = await getJson("parks?parkCode=glac");
+	return parkData.data[0];
+}
+
+export async function getParkAlerts(parkCode) {
+	const alertData = await getJson(`alerts?parkCode=${parkCode}`);
+	return alertData.data;
+}
+
+export async function getVisitorCenterData(parkCode) {
+	const visitorData = await getJson(`visitorcenters?parkCode=${parkCode}`);
+	return visitorData.data;
 }
 
 export function getParkInfoLinks(data) {

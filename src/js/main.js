@@ -1,8 +1,9 @@
+import "../css/style.css";
+import "../css/home.css";
+
 import { getParkData, getParkInfoLinks } from "./parkService.mjs";
 import { mediaCardTemplate } from "./templates.mjs";
 import { setHeaderFooter } from "./setHeaderFooter.mjs";
-
-
 
 function setParkIntro(data) {
 	const introEl = document.querySelector(".intro");
