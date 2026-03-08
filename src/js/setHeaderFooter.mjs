@@ -1,4 +1,5 @@
 import { parkInfoTemplate } from "./templates.mjs";
+import enableNavigation from "./navigation.mjs";
 
 function getMailingAddress(addresses) {
 	const mailing = addresses.find((address) => address.type === "Mailing");
@@ -44,4 +45,5 @@ function setHeaderInfo(data) {
 export function setHeaderFooter(data) {
 	setHeaderInfo(data);
 	setFooter(data);
+	enableNavigation();
 }
